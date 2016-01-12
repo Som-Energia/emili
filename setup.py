@@ -19,9 +19,9 @@ setup(
 		'emili.py',
 		],
 	install_requires=[
+        'deansi',
         'consolemsg',
 		'markdown',
-        'deansi',
         'premailer',
 	],
 	classifiers = [
