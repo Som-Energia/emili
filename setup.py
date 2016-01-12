@@ -12,7 +12,9 @@ setup(
 	url = 'https://github.com/Som-Energia/emili',
 	long_description = readme,
 	license = 'GNU General Public License v3 or later (GPLv3+)',
-    py_modules = "emili.py",
+    py_modules = [
+        "emili"
+        ],
 	scripts=[
 		'emili.py',
 		],
@@ -29,7 +31,7 @@ setup(
 		'Environment :: Console',
 		'Topic :: Software Development :: Libraries :: Python Modules',
 		'Topic :: Communications :: Email :: Email Clients (MUA)',
-		'Topic :: Text Processing :: Markup :: Markdown',
+#		'Topic :: Text Processing :: Markup :: Markdown',
 		'Intended Audience :: Developers',
 		'Intended Audience :: Science/Research',
 		'Development Status :: 5 - Production/Stable',
