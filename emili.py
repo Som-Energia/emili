@@ -27,6 +27,11 @@ def _unicode(string):
      if hasattr(str, 'decode'):
          return string.decode('utf8')
      return string
+try:
+    from consolemsg import step
+except ImportError:
+    import sys
+    step = lambda msg: sys.stderr.write(":: "+msg+'\n')
 
 
 def sendMail(
@@ -51,15 +56,7 @@ def sendMail(
     from email.mime.base import MIMEBase
     from email.mime.text import MIMEText
     from email.encoders import encode_base64
-
-    try:
-        from consolemsg import step
-    except ImportError:
-        import sys
-        step = lambda msg: sys.stderr.write(":: "+msg+'\n')
-
     from config import smtp
-
     # Headers
 
     msg = MIMEMultipart()
@@ -124,7 +121,7 @@ def sendMail(
         content.attach(MIMEText(html,'html','utf8'))
 
         import sys
-        sys.stdout.write(html)
+        #sys.stdout.write(html)
 
     msg.attach(content)
 
@@ -254,7 +251,7 @@ def main():
     else:
         content = _unicode(sys.stdin.read())
 
-    sys.stdout.write(content)
+    #sys.stdout.write(content)
 
     sendMail(
         sender = args.sender,
