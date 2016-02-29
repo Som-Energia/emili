@@ -47,6 +47,7 @@ def sendMail(
         replyto=[],
         attachments = [],
         template=None,
+        config=None,
 	stylesheets = [],
 	verbose=True
         ):
@@ -56,7 +57,13 @@ def sendMail(
     from email.mime.base import MIMEBase
     from email.mime.text import MIMEText
     from email.encoders import encode_base64
-    from config import smtp
+    if not config:
+        from config import smtp
+    else:
+        print config
+        locals={'smtp':{}}
+        execfile(config,locals)
+        smtp=locals['smtp']
     # Headers
 
     msg = MIMEMultipart()
@@ -178,7 +185,13 @@ def parseArgs():
         metavar="BODYFILE",
         help="File containing the message body (defaults to stdin)",
         )
-
+    parser.add_argument(
+        '-C',
+        '--config',
+        dest='config',
+        metavar="CONFIG.PY",
+        help="Python Module with smtp configuration defined."
+        )
     parser.add_argument(
         '-c',
         '--cc',
@@ -260,6 +273,7 @@ def main():
         cc = args.cc,
         bcc = args.bcc,
         replyto = args.replyto,
+        config = args.config,
         attachments = args.attachments,
         template = args.template,
         stylesheets = args.style,
