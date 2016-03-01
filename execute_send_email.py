@@ -45,7 +45,7 @@ def main():
         output = call(command+">/tmp/buffer_emili.txt 2>&1",shell=True)
         if output:
             call('echo "\\nError "'+str(output)+'>>/tmp/buffer_emili.txt',shell=True)
-            cmd = "./emili.py -f sender@example.org -s "+args.subject+" "
+            cmd = "emili.py -f sender@example.org -s "+args.subject+" "
             cmd += " ".join(["-t "+arg for arg in args.to])
             if args.config:
                 cmd+=" -C "+args.config
@@ -53,7 +53,7 @@ def main():
             call(cmd,shell=True)
     else:
         from os import system
-        cmd = command+" 2>&1 | ./emili.py -f sender@example.org"
+        cmd = command+" 2>&1 | emili.py -f sender@example.org"
         cmd+=" -s "+args.subject+" "+" ".join(["-t "+arg for arg in args.to])
         if args.config:
             cmd+=" -C "+args.config
