@@ -17,6 +17,8 @@ setup(
         ],
 	scripts=[
 		'emili.py',
+        'activate_wrapper.sh',
+        'execute_send_email.py'
 		],
 	install_requires=[
         'deansi',
