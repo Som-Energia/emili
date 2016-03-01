@@ -60,7 +60,6 @@ def sendMail(
     if not config:
         from config import smtp
     else:
-        print config
         locals={'smtp':{}}
         execfile(config,locals)
         smtp=locals['smtp']
