@@ -60,9 +60,8 @@ def sendMail(
     if not config:
         from config import smtp
     else:
-        locals={'smtp':{}}
-        execfile(config,locals)
-        smtp=locals['smtp']
+        import imp
+        smtp=imp.load_source('conf',config).smtp
     # Headers
 
     msg = MIMEMultipart()
