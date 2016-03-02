@@ -61,7 +61,7 @@ def sendMail(
         from config import smtp
     else:
         import imp
-        smtp=imp.load_source('conf',config).smtp
+        smtp=imp.load_source('config',config).smtp
     # Headers
 
     msg = MIMEMultipart()
