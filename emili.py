@@ -5,7 +5,8 @@
 TODO:
 - Check address format
 - Format markdown as nice text
-- 
+- Strip ansi codes for text version
+- Combining markdown intro with ansi output
 """
 
 htmltemplate = u"""\
