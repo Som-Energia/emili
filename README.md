@@ -22,22 +22,24 @@ emili.sendmail(
     from  = "me@acme.cat",
     to = [ "abe@acme.cat", "bill@acme.cat" ],
     bcc = [ "me@acme.cat" ],
-    subject = []
+    subject = "About this email"
     md = content,
     attachments = [ 'onefile.pdf' ],
+	config = '../config.py',
     )
 ```
+
 
 Right now a config.py file is required containing the configuration options
 for the SMTP connection in a dictionary named `smtp`:
 
 ```python
-smtp={
+smtp=dict(
     host='smtp.acme.cat',
     port='',
     user='roadrunner@acme.cat',
     password='mecmec',
-}
+)
 ```
 
 
@@ -45,10 +47,10 @@ smtp={
 
 ```
 usage: emili.py [-h] -f SENDER -s SUBJECT -t recipient [--body TEXT]
-                [--bodyfile BODYFILE] [-c CC] [-b BCC] [-r REPLYTO]
-                [--format FORMAT] [--style CSSFILE] [--template TEMPLATE]
+                [--bodyfile BODYFILE] [-C CONFIG.PY] [-c CC] [-b BCC]
+                [-r REPLYTO] [--format FORMAT] [--style CSSFILE]
+                [--template TEMPLATE]
                 [FILE [FILE ...]]
-
 Sends an email.
 
 positional arguments:
@@ -64,6 +66,8 @@ optional arguments:
                         Message recipient ('To:' header) (multiple)
   --body TEXT           Message body (defaults to stdin)
   --bodyfile BODYFILE   File containing the message body (defaults to stdin)
+  -C CONFIG.PY, --config CONFIG.PY
+                        Python Module with smtp configuration defined.
   -c CC, --cc CC        Message copy recipient ('CC:' header) (multiple)
   -b BCC, --bcc BCC     Message hidden copy recipient ('BCC:' header)
                         (multiple), other recipients won't see this header
