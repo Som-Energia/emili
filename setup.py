@@ -12,19 +12,19 @@ setup(
 	url = 'https://github.com/Som-Energia/emili',
 	long_description = readme,
 	license = 'GNU General Public License v3 or later (GPLv3+)',
-    py_modules = [
-        "emili"
-        ],
+	py_modules = [
+		"emili"
+		],
 	scripts=[
 		'emili.py',
-        'activate_wrapper.sh',
-        'execute_send_email.py'
+		'activate_wrapper.sh',
+		'execute_send_email.py'
 		],
 	install_requires=[
-        'deansi',
-        'consolemsg',
+		'deansi',
+		'consolemsg',
 		'markdown',
-        'premailer',
+		'premailer',
 	],
 	classifiers = [
 		'Programming Language :: Python',
