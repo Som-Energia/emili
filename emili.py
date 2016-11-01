@@ -29,10 +29,11 @@ def _unicode(string):
          return string.decode('utf8')
      return string
 try:
-    from consolemsg import step
+    from consolemsg import step, success
 except ImportError:
     import sys
     step = lambda msg: sys.stderr.write(":: "+msg+'\n')
+    success = lambda msg: sys.stderr.write(">> "+msg+'\n')
 
 
 def sendMail(
@@ -50,6 +51,7 @@ def sendMail(
         template=None,
         config=None,
         stylesheets = [],
+        dump = None,
         verbose=True
         ):
 
@@ -131,15 +133,20 @@ def sendMail(
 
     msg.attach(content)
 
+    if dump:
+        with open(dump,'w') as dumpfile:
+            dumpfile.write(msg.as_string())
+        success("Email dumped as {}".format(dump))
+        return
+    return
     # Sending
-
     step("Connecting to {host}:{port} as {user}...".format(**smtp))
     server = smtplib.SMTP(smtp['host'], smtp['port'])
     server.starttls()
     server.login(smtp['user'], smtp['password'])
-    step("Sending...")
+    step("\tSending...")
     server.sendmail(sender, recipients, msg.as_string())
-    step("Disconnecting...")
+    success("\tMail sent")
     server.quit()
 
 
@@ -245,6 +252,11 @@ def parseArgs():
         help="File to attach",
         )
 
+    parser.add_argument(
+        '--dump',
+        metavar='OUTPUTFILE.eml',
+        help="Instead of sending, dump the email into a file",
+        )
     args = parser.parse_args()
     return args
 
@@ -276,6 +288,7 @@ def main():
         attachments = args.attachments,
         template = args.template,
         stylesheets = args.style,
+        dumpfile = args.dump,
         **{args.format: content}
         )
 
