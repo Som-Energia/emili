@@ -49,8 +49,8 @@ def sendMail(
         attachments = [],
         template=None,
         config=None,
-	stylesheets = [],
-	verbose=True
+        stylesheets = [],
+        verbose=True
         ):
 
     import smtplib
@@ -229,7 +229,7 @@ def parseArgs():
     parser.add_argument(
         '--style',
         metavar='CSSFILE',
-	action='append',
+        action='append',
         help="Style sheet for the html output, (multiple)",
         )
 
@@ -283,5 +283,4 @@ def main():
 if __name__ == '__main__':
     main()
 
-
-
+# vim: et ts=4 sw=4
