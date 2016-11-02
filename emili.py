@@ -60,21 +60,26 @@ def sendMail(
     from email.mime.base import MIMEBase
     from email.mime.text import MIMEText
     from email.encoders import encode_base64
+    from email.utils import formataddr, parseaddr
     if not config:
         from config import smtp
     else:
         import imp
         smtp=imp.load_source('config',config).smtp
-    # Headers
 
+    def formatAddress(address):
+        return formataddr(parseaddr(address))
+    def formatAddresses(addresses):
+        return ', '.join(formatAddress(a) for a in addresses)
+
+    # Headers
     msg = MIMEMultipart()
     msg['Subject'] = subject
-    # TODO: check address format
-    msg['From'] = sender
-    msg['To'] = ', '.join(to)
-    if cc: msg['CC'] = ', '.join(cc)
-    if bcc: msg['BCC'] = ', '.join(bcc)
-    if replyto: msg['Reply-To'] = ', '.join(replyto)
+    msg['From'] = formatAddress(sender)
+    msg['To'] = formatAddresses(to)
+    if cc: msg['CC'] = formatAddresses(cc)
+    if bcc: msg['BCC'] = formatAddresses(bcc)
+    if replyto: msg['Reply-To'] = formatAddresses(replyto)
 
     recipients = to + (cc if cc else []) + (bcc if bcc else [])
 
