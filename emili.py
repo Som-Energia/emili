@@ -85,10 +85,11 @@ def sendMail(
         part = MIMEBase('application', "octet-stream")
         part.set_payload(open(filename, "rb").read())
         encode_base64(part)
-
+        import os
         part.add_header(
             'Content-Disposition',
-            'attachment; filename="{}"'.format(filename.replace('"', '')))
+            'attachment; filename="{}"'.format(
+                os.path.basename(filename.replace('"', ''))))
 
         msg.attach(part)
 
