@@ -49,8 +49,9 @@ Command line usage
     usage: emili.py [-h] -f SENDER -s SUBJECT -t recipient [--body TEXT]
                     [--bodyfile BODYFILE] [-C CONFIG.PY] [-c CC] [-b BCC]
                     [-r REPLYTO] [--format FORMAT] [--style CSSFILE]
-                    [--template TEMPLATE]
+                    [--template TEMPLATE] [--dump OUTPUTFILE.eml]
                     [FILE [FILE ...]]
+
     Sends an email.
 
     positional arguments:
@@ -79,4 +80,5 @@ Command line usage
                             color codes in html or stripping them for text.
       --style CSSFILE       Style sheet for the html output, (multiple)
       --template TEMPLATE   Alternative template for the html body.
-
+      --dump OUTPUTFILE.eml
+                            Instead of sending, dump the email into a file
