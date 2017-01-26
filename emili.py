@@ -144,7 +144,7 @@ def sendMail(
             dumpfile.write(msg.as_string())
         success("Email dumped as {}".format(dump))
         return
-    return
+
     # Sending
     step("Connecting to {host}:{port} as {user}...".format(**smtp))
     server = smtplib.SMTP(smtp['host'], smtp['port'])

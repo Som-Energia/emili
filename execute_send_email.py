@@ -40,6 +40,7 @@ def main():
 
     args = parser.parse_args()
     command = " ".join(args.command[1:])
+
     if args.onlyerrors:
         from subprocess import call
         output = call(command+">/tmp/buffer_emili.txt 2>&1",shell=True)
@@ -59,5 +60,6 @@ def main():
             cmd+=" -C "+args.config
         cmd+=" >>/tmp/output_emili.txt 2>&1"
         system(cmd)
+
 if __name__ == '__main__':
     main()
