@@ -61,12 +61,6 @@ def sendMail(
     from email.mime.text import MIMEText
     from email.encoders import encode_base64
     from email.utils import formataddr, parseaddr
-    if not config:
-        from config import smtp
-    else:
-        import imp
-        smtp=imp.load_source('config',config).smtp
-
     def formatAddress(address):
         return formataddr(parseaddr(address))
     def formatAddresses(addresses):
@@ -146,6 +140,12 @@ def sendMail(
         return
 
     # Sending
+    if not config:
+        from config import smtp
+    else:
+        import imp
+        smtp=imp.load_source('config',config).smtp
+
     step("Connecting to {host}:{port} as {user}...".format(**smtp))
     server = smtplib.SMTP(smtp['host'], smtp['port'])
     server.starttls()
