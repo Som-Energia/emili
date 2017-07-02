@@ -5,7 +5,7 @@ readme = open("README.rst").read()
 
 setup(
 	name = "emili",
-	version = "1.4",
+	version = "1.5~git",
 	description = "Mail sending Python/CLI interface using markdown or ANSI codes based content",
 	author = "David Garcia Garzon",
 	author_email = "voki@canvoki.net",
