@@ -56,11 +56,11 @@ output+=$(
 		error "Command failed with code $result" 2>&1
 	)
 
-cat <<<$output
+cat <<<"$output"
 
 [ "$result" != '0' ] || [ "$always" == 'y' ] && (
 	[ $result == 0 ] || subject="FAILED: $subject"
 	step "Sending email..."
-	emili.py $configopt --format ansi $fromopt $recipients -s "${subject}" <<<$output
+	emili.py $configopt --format ansi $fromopt $recipients -s "${subject}" <<<"$output"
 )
 
