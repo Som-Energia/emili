@@ -36,7 +36,7 @@ for the SMTP connection in a dictionary named `smtp`:
 ```python
 smtp=dict(
     host='smtp.acme.cat',
-    port='',
+    port=465,
     user='roadrunner@acme.cat',
     password='mecmec',
 )
