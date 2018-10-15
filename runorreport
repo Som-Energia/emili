@@ -1,0 +1,66 @@
+#!/bin/bash
+
+color() { echo -e '\033['$1'm'"${@:2}"'\033[0m' >&2; }
+error() { color "31" "ERROR:" "$@"; }
+step() { color "34;1" "::" "$@"; }
+success() { color "32;1" ">>" "$@"; }
+fail() { error "$@"; exit -1; }
+function quote() { for i; do printf "%q " "$i"; done }
+
+# Take from environment if they exist
+EMILI_CONFIG=${EMILI_CONFIG:-~/emili.cfg}
+EMILI_FROM=${EMILI_FROM:-sistemas@somenergia.coop}
+
+configopt="-C $EMILI_CONFIG"
+fromopt="-f $EMILI_FROM"
+
+while [ $# -gt 0 ]
+do
+	arg="$1"
+	case $arg in
+		--) shift; break;; # Separates the actual command line
+		-C|--config)
+			configopt="-C $2"
+			shift
+			;;
+		-f|--from)
+			fromopt="-f $2" 
+			shift
+			;;
+		-t|--to)
+			recipients="$recipients -t $2" 
+			shift
+			;;
+		-s|--subject)
+			subject="$2"
+			shift
+			;;
+		-a|--always)
+			always='y'
+			;;
+	esac
+	shift
+done
+# Set the default values
+
+[ $# -gt 0 ] || fail "No command provided"
+
+subject=${subject:-"Tarea:" $*}
+output=$(step "Running:" $(quote "$@") 2>&1)
+output+=$(echo; "$@" 2>&1)
+result=$?
+output+=$(
+	echo;
+	[ $result == 0 ] &&
+		success "Command successful" 2>&1 ||
+		error "Command failed with code $result" 2>&1
+	)
+
+cat <<<$output
+
+[ "$result" != '0' ] || [ "$always" == 'y' ] && (
+	[ $result == 0 ] || subject="FAILED: $subject"
+	step "Sending email..."
+	emili.py $configopt --format ansi $fromopt $recipients -s "${subject}" <<<$output
+)
+
