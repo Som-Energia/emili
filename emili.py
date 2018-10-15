@@ -55,12 +55,12 @@ def sendMail(
         verbose=True
         ):
 
-    import smtplib
     from email.mime.multipart import MIMEMultipart
     from email.mime.base import MIMEBase
     from email.mime.text import MIMEText
     from email.encoders import encode_base64
     from email.utils import formataddr, parseaddr
+
     def formatAddress(address):
         return formataddr(parseaddr(address))
     def formatAddresses(addresses):
@@ -140,6 +140,9 @@ def sendMail(
         return
 
     # Sending
+    sendOverSmtp(config, sender, recipients, msg)
+
+def sendOverSmtp(config, sender, recipients, msg):
     if not config:
         from config import smtp
     else:
@@ -147,6 +150,7 @@ def sendMail(
         smtp=imp.load_source('config',config).smtp
 
     step("Connecting to {host}:{port} as {user}...".format(**smtp))
+    import smtplib
     server = smtplib.SMTP(smtp['host'], smtp['port'])
     server.starttls()
     server.login(smtp['user'], smtp['password'])
@@ -154,8 +158,6 @@ def sendMail(
     server.sendmail(sender, recipients, msg.as_string())
     success("\tMail sent")
     server.quit()
-
-
 
 def parseArgs():
     import argparse
@@ -294,7 +296,7 @@ def main():
         attachments = args.attachments,
         template = args.template,
         stylesheets = args.style,
-        dumpfile = args.dump,
+        dump = args.dump,
         **{args.format: content}
         )
 
