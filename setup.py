@@ -18,7 +18,7 @@ setup(
 	scripts=[
 		'emili.py',
 		'execute_send_email.py',
-		'runorreport',
+		'reportrun',
 		],
 	install_requires=[
 		'deansi',
