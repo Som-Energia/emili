@@ -5,7 +5,7 @@ readme = open("README.md").read()
 
 setup(
 	name = "emili",
-	version = "1.6~git",
+	version = "1.6",
 	description = "Mail sending Python/CLI interface using markdown or ANSI codes based content",
 	author = "David Garcia Garzon",
 	author_email = "voki@canvoki.net",
