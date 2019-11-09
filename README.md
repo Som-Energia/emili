@@ -114,3 +114,40 @@ optional arguments:
                         Marks the start of the command to execute.
 ```
 
+## Changelog
+
+### 1.6 (2019-10-09)
+
+- Fix: reportrun ignored endlines
+- reportrun accepts attatchment
+- reportrun --help option and documented in README
+
+### 1.5 (2018-10-15)
+
+- Added `reportrun` script
+
+### 1.4 (2017-07-02)
+
+- Fix: dump does not require configuration
+
+### 1.3 (2016-11-02)
+
+- `--dump` option to dump the resulting email as file instead of sending it
+- Fix: Better processing addresses in the format `Me <me@here.org>`
+- Fix: Do not take the full path as attachment name
+- `activate_wrapper.sh` moved to `somenergia-utils` repo
+
+### 1.2 (2016-03-28)
+
+- Option `-c`/`--config` to explicit configuration file
+- Added wrapper `execute_send_mail.sh`
+- Added wrapper `activate_wrapper.sh`
+
+### 1.1 (2016-01-12)
+
+- Available on PyPi
+
+### 1.0 (2016-01-12)
+
+- First version
+
