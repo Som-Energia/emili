@@ -18,7 +18,11 @@ while [ $# -gt 0 ]
 do
 	arg="$1"
 	case $arg in
-		--) shift; break;; # Separates the actual command line
+		[-][-])
+			# Separates the actual command line
+			shift
+			break
+			;;
 		-C|--config)
 			configopt="-C $2"
 			shift
@@ -37,6 +41,9 @@ do
 			;;
 		-a|--always)
 			always='y'
+			;;
+		*)
+			attachments="$attachments $1"
 			;;
 	esac
 	shift
@@ -61,6 +68,6 @@ cat <<<"$output"
 [ "$result" != '0' ] || [ "$always" == 'y' ] && (
 	[ $result == 0 ] || subject="FAILED: $subject"
 	step "Sending email..."
-	emili.py $configopt --format ansi $fromopt $recipients -s "${subject}" <<<"$output"
+	emili.py $configopt --format ansi $fromopt $recipients -s "${subject}" $attachments <<<"$output"
 )
 
