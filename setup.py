@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from setuptools import setup
 
-readme = open("README.rst").read()
+readme = open("README.md").read()
 
 setup(
 	name = "emili",
@@ -11,6 +11,7 @@ setup(
 	author_email = "voki@canvoki.net",
 	url = 'https://github.com/Som-Energia/emili',
 	long_description = readme,
+	long_description_content_type='text/markdown',
 	license = 'GNU General Public License v3 or later (GPLv3+)',
 	py_modules = [
 		"emili"
