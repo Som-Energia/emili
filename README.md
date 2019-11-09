@@ -84,3 +84,33 @@ optional arguments:
                         Instead of sending, dump the email into a file
 ```
 
+## reportrun
+
+```
+usage: reportrun [-h] -s SUBJECT -t RECIPIENT [-f SENDER] [-C CONFIG.PY]
+                [FILE [FILE ...]] -- COMMAND [COMMAND_ARG ...]
+
+reportrun wraps the execution of a command and sends an email
+whenever the command fails. The mail sending is processed by
+emili so that ansi codes and spacing are shown properly.
+
+positional arguments:
+  FILE                  File to attach
+  COMMAND               Command to run
+  COMMAND_ARG           Argument for COMMAND
+
+optional arguments:
+  -f SENDER, --from SENDER
+                        Message sender ('From:' header)
+  -s SUBJECT, --subject SUBJECT
+                        Message subject ('Subject:' header)
+  -t recipient, --to recipient
+                        Message recipient ('To:' header) (multiple)
+  -C CONFIG.PY, --config CONFIG.PY
+                        Python Module with smtp configuration defined.
+  -a, --always
+                        Sends even if the command does not fail.
+  --
+                        Marks the start of the command to execute.
+```
+
