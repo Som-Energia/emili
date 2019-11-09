@@ -117,6 +117,10 @@ optional arguments:
 
 ## Changelog
 
+### 1.7 (UNRELEASED)
+
+- Removed `execute_send_mail.py`
+
 ### 1.6 (2019-10-09)
 
 - Fix: reportrun ignored endlines

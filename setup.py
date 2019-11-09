@@ -18,7 +18,6 @@ setup(
 		],
 	scripts=[
 		'emili.py',
-		'execute_send_email.py',
 		'reportrun',
 		],
 	install_requires=[
