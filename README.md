@@ -3,7 +3,8 @@
 Simple interface for sending mails. Turns input formats
 such as Markdown or console outputs using ANSI colors
 into nice dual plaintext/html messages.
-
+You may specify an html skeleton and a css file
+which are turn mail compatible.
 
 ## Module usage
 
