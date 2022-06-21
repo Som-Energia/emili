@@ -24,7 +24,7 @@ setup(
 		'deansi',
 		'consolemsg',
 		'markdown',
-		'premailer',
+		'premailer<=2.9.6',
 	],
 	classifiers = [
 		'Programming Language :: Python',
